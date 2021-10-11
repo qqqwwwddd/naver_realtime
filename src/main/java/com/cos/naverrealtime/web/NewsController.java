@@ -21,16 +21,12 @@ public class NewsController {
 	
 	private final NewsRepository newsRepository;
 	
-	@CrossOrigin // 서버는 다른 도메인의 자바스크립트 요청을 거부한다. (허용해주는 어노테이션)
+	@CrossOrigin 
 	@GetMapping(value =  "/news", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
 	public Flux<News> findAll(){
-		return NewsRepository.mFindAll()
+		return newsRepository.mFindAll()
 		.subscribeOn(Schedulers.boundedElastic());
 	}
-	
-	@PostMapping("/news")
-	public Mono<News> save(@RequestBody News News){
-		return NewsRepository.save(News);
-	}
+
 }
 

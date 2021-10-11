@@ -1,5 +1,6 @@
 package com.cos.naverrealtime.batch;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,21 +19,16 @@ public class NewsBatch {
 	private final NewsRepository newsRepository;
 	private final NaverCraw naverCraw; // DI
 	 
-	@Scheduled(fixedDelay=1000*60*1)
+	@Scheduled(cron = "0 0 1 * * ?")
 	public void naverCrawAndSave() {
 	
-		List<News> newsList = naverCraw.newsCollect();
-		
+		List<News> newsList ;
 		try {
-	         System.out.println(newsList);
-	         System.out.println("=======================");
-	         newsRepository.saveAll(newsList);
-	         System.out.println(newsList);
-	      } catch (Exception e) {
-	         System.out.println("db저장 오류");
-	      }
-	      
-	      System.out.println("실행됨");
-	      
-	   }
+			newsList = naverCraw.newsCollect();
+			newsRepository.saveAll(newsList);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		System.out.println("실행");
 	}
+}

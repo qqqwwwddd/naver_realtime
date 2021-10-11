@@ -1,6 +1,7 @@
 package com.cos.naverrealtime.domain;
 
 
+import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -18,5 +19,5 @@ public class News {
 	private String _id;
 	private String company;
 	private String title;
-	private String createdAt;
+	private LocalDateTime createdAt;
 }

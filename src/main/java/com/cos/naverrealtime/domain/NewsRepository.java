@@ -9,9 +9,6 @@ import reactor.core.publisher.Flux;
 public interface NewsRepository extends ReactiveMongoRepository<News, String> {
 	@Tailable
 	@Query("{}")
-	static 
-	Flux<News> mFindAll() {
-		// TODO Auto-generated method stub
-		return null;
+	Flux<News> mFindAll();
 	}
-}
+
